@@ -1,6 +1,7 @@
 const fs = require("fs");
 const http = require("http");
 const url = require("url");
+const slugify = require("slugify")
 const replaceTemplate = require("./modules.js/replaceTemplate");
 
 
@@ -58,12 +59,24 @@ const replaceTemplate = require("./modules.js/replaceTemplate");
 
 /*                Server                 */
 
-const tempOverview = fs.readFileSync(`${__dirname}/templates/template-overview.html`,"utf-8");
-const tempCard = fs.readFileSync(`${__dirname}/templates/template-card.html`,"utf-8");
-const tempProduct = fs.readFileSync(`${__dirname}/templates/template-product.html`,"utf-8");
+const tempOverview = fs.readFileSync(
+    `${__dirname}/templates/template-overview.html`,
+    "utf-8"
+);
+const tempCard = fs.readFileSync(
+    `${__dirname}/templates/template-card.html`,
+    "utf-8"
+);
+const tempProduct = fs.readFileSync(
+    `${__dirname}/templates/template-product.html`,
+    "utf-8"
+);
 
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`,"utf-8");
 const dataObj = JSON.parse(data);
+
+const slugs = dataObj.map(el=> slugify(el.productName,{lower:true}))
+console.log(slugs)
 
 const server = http.createServer((req,res)=>{
     // Overview Page
@@ -178,3 +191,21 @@ server.listen("8000","127.0.0.1",()=>{
 
 
 
+
+/*
+    Some Notes
+
+    Versions 
+    for example 1.18.11
+    1 is the major number
+    The major number introduces some new features into the package but it includes breaking changes
+    that means it will not be compatible with the old code
+
+    18 is the minor number
+    The minor number introduces some new features into the package but it does not include breaking changes
+    that means it will be compatible with the old code
+
+    11 is called the patch version
+    the patch version is only intented to fix bugs
+
+*/
