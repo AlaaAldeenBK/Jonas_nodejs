@@ -22,6 +22,24 @@ mongoose.connect(process.env.DATABASE_LOCAL, {
   
 }).then(() =>console.log("DB connection successfully"))
 
+const tourSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "A tour must have a name"],
+    unique: true
+  },
+  rating: {
+    type: Number,
+    default: 4.5
+  },
+  price: {                  // This is the schema type object
+    type: Number,
+    required: [true, "A tour must have a price"]
+  }
+});
+
+const Tour = mongoose.model("Tour",tourSchema);
+
 // console.log(app.get('env'));
 // console.log(process.env);
 
