@@ -5,14 +5,22 @@ dotenv.config({ path: './config.env' });
 // console.log(process.env.NODE-ENV);
 // dotenv.config({ path: path.resolve(__dirname, './config.env') })
 const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
-mongoose.connect(DB, {
+
+// Hosted Database version
+// mongoose.connect(DB, {
+//   useNewUrlParser: true,
+//   useCreateIndex: true,
+//   useFindAndModify: false
+// }).then(() =>console.log("DB connection successfully"))
+
+// Local database version
+
+mongoose.connect(process.env.DATABASE_LOCAL, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false
-}).then(con =>{
-  console.log(con.connections)
-  console.log("DB connection successfully")
-})
+  
+}).then(() =>console.log("DB connection successfully"))
 
 // console.log(app.get('env'));
 // console.log(process.env);
