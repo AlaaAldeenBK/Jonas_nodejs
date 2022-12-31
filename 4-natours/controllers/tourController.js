@@ -16,15 +16,15 @@ const Tour = require('./../models/tourModel')
 //   next();
 // };
 
-exports.checkBody = (req, res, next) => {
-  if (!req.body.name || !req.body.price) {
-    return res.status(400).json({
-      status: 'fail',
-      message: 'Missing name or price',
-    });
-  }
-  next();
-};
+// exports.checkBody = (req, res, next) => {
+//   if (!req.body.name || !req.body.price) {
+//     return res.status(400).json({
+//       status: 'fail',
+//       message: 'Missing name or price',
+//     });
+//   }
+//   next();
+// };
 
 exports.getAllTours = (req, res) => {
   // Callback function here is called route handler
@@ -73,6 +73,12 @@ exports.createTour = (req, res) => {
   //     });
   //   }
   // );
+
+  // const newTour = new Tour();
+  // newTour.save() 
+
+    
+
 };
 
 exports.updateTour = (req, res) => {
